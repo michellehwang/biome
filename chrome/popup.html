@@ -1,11 +1,14 @@
 <!doctype html>
 <html>
   <head>
+    <script src="jquery.js"></script>
+    <script src="popup.js"></script>
+
     <title>Biome's Popup</title>
     <style>
       body {
-        min-width: 357px;
-        overflow-x: hidden;
+        min-width: 320px;
+        overflow: hidden;
       }
 
       img {
@@ -18,12 +21,18 @@
     </style>
 
   </head>
-  <body>
-  <p> click me! </p>
     <video id="video"></video>
-    <button id="startbutton">Take photo</button>
+    <button id="authenticate">Authenticate</button>
+    <button id="register">Register</button>
     <canvas id="canvas"></canvas>
-    <script src="webcam.js"></script>
+
+    <form id="loginform" style="display:none">
+        FB Login: <input id="loginText"><br>
+        FB Password: <input type="password" id="passwordText"><br>
+        <button id="submit">Submit</button>
+    </form>
+
   </body>
+
 </html>
 
