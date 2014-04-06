@@ -11,24 +11,28 @@
 
   </head>
     <div id="vid"></div>
-    <video id="video"></video>
+    <video id="video"></video><br>
     <button id="authenticate">Authenticate</button><br>
     <button id="addimage">Add image and login</button><br>
+    <div id="forms">
+        <form id="loginform">
+            facebook <br>
+            <input id="fbloginText" placeholder="username"><br>
+            <input type="password" id="fbpasswordText" placeholder="password"><br>
+        </form>
 
-    <form id="loginform">
-        FB Login: <input id="fbloginText"><br>
-        FB Password: <input type="password" id="fbpasswordText"><br>
-    </form>
+        <form id="loginform">
+            google <br>
+            <input id="gmailloginText" placeholder="username"><br>
+            <input type="password" id="gmailpasswordText" placeholder="password"><br>
+        </form>
 
-    <form id="loginform">
-        Gmail Login: <input id="gmailloginText"><br>
-        Gmail Password: <input type="password" id="gmailpasswordText"><br>
-    </form>
-
-    <form id="loginform">
-        Dropbox Login: <input id="dropboxloginText"><br>
-        Dropbox Password: <input type="password" id="dropboxpasswordText"><br>
-    </form>
+        <form id="loginform">
+            dropbox <br>
+            <input id="dropboxloginText" placeholder="username"><br>
+            <input type="password" id="dropboxpasswordText" placeholder="password"><br>
+        </form>
+    </div>
 
     <button id="register">Register</button>
 
