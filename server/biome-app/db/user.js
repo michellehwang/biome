@@ -13,6 +13,7 @@ userSchema.methods.deleteAccount = function (id) {
 
 userSchema.methods.addAccount = function (acct, uname, pwd) {
 	newAcct = new Account({ username : uname, password : pwd });
+	console.log(this)
 	this.accounts[acct] = newAcct
 }
 

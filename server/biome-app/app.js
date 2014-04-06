@@ -11,8 +11,7 @@ var path = require('path');
 var fs = require('fs');
 
 var app = express();
-var User = require('./user.js').User;
-var User = require('./account.js').Account;
+var User = require('./db/user.js').User;
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -34,8 +33,6 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
-app.post('/create', routes.create);
-app.delete('/del', routes.del);
 
 var server = http.createServer(app);
 
@@ -92,11 +89,12 @@ function serverReg(file, accounts) {
         if(err) {
             console.log(err);
         } else {
-        	newUser = User({ imgPath: [imgPath] })
+        	newUser = User({ accounts: {}, imgPath: [imgPath] })
         	for (acct in accounts) {
         		var vals = accounts[acct];
-        		user.addAccount(acct, vals["username"], vals["password"])
+        		newUser.addAccount(acct, vals["username"], vals["password"])
         	}
+        	newUser.save()
             console.log("The file was saved!");
         }
     }); 

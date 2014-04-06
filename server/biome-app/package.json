@@ -9,6 +9,7 @@
     "express": "3.5.1",
     "jade": "*",
     "mongodb": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "binaryjs": "*"
   }
 }
