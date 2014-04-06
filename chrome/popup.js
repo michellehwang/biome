@@ -1,35 +1,34 @@
-  var dataURLtoBlob = function(dataURL) {
-        var BASE64_MARKER = ';base64,';
-        if (dataURL.indexOf(BASE64_MARKER) == -1) {
-          var parts = dataURL.split(',');
-          var contentType = parts[0].split(':')[1];
-          var raw = parts[1];
+var dataURLtoBlob = function(dataURL) {
+    var BASE64_MARKER = ';base64,';
+    if (dataURL.indexOf(BASE64_MARKER) == -1) {
+      var parts = dataURL.split(',');
+      var contentType = parts[0].split(':')[1];
+      var raw = parts[1];
 
-          return new Blob([raw], {type: contentType});
-        }
+      return new Blob([raw], {type: contentType});
+    }
 
-        var parts = dataURL.split(BASE64_MARKER);
-        var contentType = parts[0].split(':')[1];
-        var raw = window.atob(parts[1]);
-        var rawLength = raw.length;
+    var parts = dataURL.split(BASE64_MARKER);
+    var contentType = parts[0].split(':')[1];
+    var raw = window.atob(parts[1]);
+    var rawLength = raw.length;
 
-        var uInt8Array = new Uint8Array(rawLength);
+    var uInt8Array = new Uint8Array(rawLength);
 
-        for (var i = 0; i < rawLength; ++i) {
-          uInt8Array[i] = raw.charCodeAt(i);
-        }
+    for (var i = 0; i < rawLength; ++i) {
+      uInt8Array[i] = raw.charCodeAt(i);
+    }
 
-        return new Blob([uInt8Array], {type: contentType});
-    };
+    return new Blob([uInt8Array], {type: contentType});
+};
 
 $(document).ready(function() {
 
   var streaming = false,
       video        = document.querySelector('#video'),
-      canvas       = document.querySelector('#canvas'),
       photo        = document.querySelector('#photo'),
-      width = 320,
-      height = 0;
+      width = 1280,
+      height = 576;
 
   navigator.getMedia = ( navigator.getUserMedia ||
                          navigator.webkitGetUserMedia ||
@@ -38,7 +37,16 @@ $(document).ready(function() {
 
   navigator.getMedia(
     {
-      video: true,
+        video: {
+            mandatory: {
+              minWidth: 1280,
+              minHeight: 720,
+              minFrameRate: 30
+            },
+            optional: [
+              { minFrameRate: 60 }
+            ]
+          },
       audio: false
     },
     function(stream) {
@@ -60,15 +68,22 @@ $(document).ready(function() {
       height = video.videoHeight / (video.videoWidth/width);
       video.setAttribute('width', width);
       video.setAttribute('height', height);
-      canvas.setAttribute('width', width);
-      canvas.setAttribute('height', height);
+      //canvas.setAttribute('width', width);
+      //canvas.setAttribute('height', height);
       streaming = true;
     }
   }, false);
 
   $('#authenticate').click(function(){
+    var canvas = document.createElement("canvas");
+    canvas.id = "canvas";
+    document.body.insertBefore(canvas, document.body.childNodes[0]);
+
     canvas.width = width;
     canvas.height = height;
+    $("#video").hide();
+    $("#vid").hide();
+
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
     var dataBlob = dataURLtoBlob(canvas.toDataURL('image/png'));
 
@@ -83,8 +98,6 @@ $(document).ready(function() {
         chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
     });
 
-
-    // Testing out injecting facebook login
   });
 
   $('#register').click(function() {

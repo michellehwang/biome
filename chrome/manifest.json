@@ -11,8 +11,10 @@
   },
 
   "permissions": [
-    "tabs", "http://www.facebook.com/*", "activeTab"
-      ],
+    "tabs",
+    "http://www.facebook.com/*",
+    "activeTab"
+  ],
 
   "options_page": "options.html"
 }
