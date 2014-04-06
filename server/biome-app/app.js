@@ -36,6 +36,8 @@ app.get('/users', user.list);
 
 var server = http.createServer(app);
 
+require('./db/create');
+
 // Start Binary.js server
 var BinaryServer = require('binaryjs').BinaryServer;
 var bs = BinaryServer({server: server});
@@ -76,7 +78,7 @@ function serverAuth(file, ID) {
         } else {
             console.log("The file was saved!");
         }
-    }); 
+    });
 
     return {'ID': ID, 'userAccounts' : {'facebook' : {'username' : 'iris', 'password' : 'hola'}}}
 }
@@ -84,7 +86,7 @@ function serverAuth(file, ID) {
 function serverReg(file, accounts) {
     var fs = require('fs');
     var imgPath = "images/img_" + imgCount + ".png";
-    imgCount++; 
+    imgCount++;
     fs.writeFile(imgPath, file, function(err) {
         if(err) {
             console.log(err);
@@ -97,7 +99,7 @@ function serverReg(file, accounts) {
         	newUser.save()
             console.log("The file was saved!");
         }
-    }); 
+    });
     console.log("I'm registering!");
     console.log("file is: ");
     console.log(file);

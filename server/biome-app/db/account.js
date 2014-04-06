@@ -5,5 +5,5 @@ var accountSchema = mongoose.Schema({
     password: String,
 })
 
-var Account = mongoose.model('Account', accountSchema)
+var Account = mongoose.model('Account', accountSchema, 'Account')
 exports.Account = Account
