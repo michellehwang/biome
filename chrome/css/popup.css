@@ -12,7 +12,7 @@ img {
 }
 
 #vid {
-	background: url('../overlay.png') no-repeat;
+	background: url('../images/overlay.png') no-repeat;
 	background-size: 320px 240px;
 	height: 240px;
 	width: 320px;
