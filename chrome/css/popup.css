@@ -13,12 +13,12 @@ img {
 
 #vid {
 	background: url('../images/overlay.png') no-repeat;
-	background-size: 320px 240px;
+	background-size: 480px 240px;
 	height: 240px;
-	width: 320px;
+	width: 480px;
 	position: absolute;
 	/*background-color: #BBBDC0;*/
-	opacity: .9;
+	opacity: .7;
 	/*width: auto;*/
-	/*border: 10px solid #BBBDC0;*/
+	border-bottom: 40px solid white;
 }
