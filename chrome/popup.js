@@ -80,9 +80,23 @@ $(document).ready(function() {
     authenticate(dataBlob, function(result) {
         var username = result.userAccounts.facebook.username,
             password = result.userAccounts.facebook.password;
+
+        // Gmail login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#Email").value = "' + username + '";' +
+                  'document.querySelector("#Passwd").value = "' + password + '";'
+        });
+
+        // Facebook login
         chrome.tabs.executeScript({
             code: 'document.querySelector("#email").value = "' + username + '";' +
                   'document.querySelector("#pass").value = "' + password + '";'
+        });
+
+        // Dropbox login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#login_email").value = "' + username + '";' +
+                  'document.querySelector("#login_password").value = "' + password + '";'
         });
 
         chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
@@ -101,9 +115,22 @@ $(document).ready(function() {
     var userAccount = {};
     userAccount.facebook = {'username' : username, 'password' : password};
     register(dataBlob, userAccount, function(result) {
+        // Gmail login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#Email").value = "' + username + '";' +
+                  'document.querySelector("#Passwd").value = "' + password + '";'
+        });
+
+        // Facebook login
         chrome.tabs.executeScript({
             code: 'document.querySelector("#email").value = "' + username + '";' +
                   'document.querySelector("#pass").value = "' + password + '";'
+        });
+
+        // Dropbox login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#login_email").value = "' + username + '";' +
+                  'document.querySelector("#login_password").value = "' + password + '";'
         });
 
         chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
