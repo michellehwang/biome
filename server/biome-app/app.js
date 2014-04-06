@@ -43,6 +43,7 @@ var BinaryServer = require('binaryjs').BinaryServer;
 var bs = BinaryServer({server: server});
 
 var imgCount = 0;
+var userId = 0;
 
 // Wait for new user connections
 bs.on('connection', function(client){
@@ -97,7 +98,8 @@ function serverReg(file, accounts, ID) {
         if(err) {
             console.log(err);
         } else {
-        	newUser = User({ accounts: {}, imgPath: [imgPath] })
+        	newUser = User({ uid: userId, accounts: {}, imgPaths: [imgPath] })
+            userId += 1
         	for (acct in accounts) {
         		var vals = accounts[acct];
         		newUser.addAccount(acct, vals["username"], vals["password"])
@@ -134,6 +136,21 @@ function serverAddPhoto(file, ID) {
     //Else: add to the database
     return {'ID': ID, 'userAccounts' : {'facebook' : {'username' : 'iris', 'password' : 'hola'}, 'gmail' : {'username' : 'allen', 'password' : 'folla'}, 'dropbox' : {'username' : 'michelle', 'password' : 'mollyy' }}}
 }
+
+function findIdByPath(imgPath, callback) {
+    var cb = callback;
+    var usr = User.find({imgPaths:imgPath}, function(err, user) {
+        if (users.length > 0) {
+            callback(user); return;
+        }
+        callback(null);
+    });
+    if (usr == null) {
+        console.log("could not find usr");
+    } else {
+        return usr;
+    }
+};
 
 server.listen(9000);
 console.log('HTTP and BinaryJS server started on port 9000');
