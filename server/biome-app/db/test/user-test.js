@@ -4,15 +4,15 @@ var User = require('./../user.js').User;
 var Account = require('./../account.js').Account;
 
 var michelle = new User({ name : "michelle", accounts: {} });
-// var iris = new User({ username : "iriswang", accounts: {}});
+var iris = new User({ username : "iriswang", accounts: {}});
 
 michelle.save();
-// iris.save();
+iris.save();
 
 michelle.addAccount("dropbox", "michellehwang", "dropbox");
 michelle.addAccount("facebook", "michellehwang", "facbeook");
 michelle.addAccount("google", "michellehwang", "google");
-// iris.addAccount("iris", "fbuname", "pw")
+iris.addAccount("iris", "fbuname", "pw")
 
 // User.find({ name: "michelle"}, function(err, result) {
 // 	console.log(err);
