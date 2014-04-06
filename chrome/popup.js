@@ -68,8 +68,6 @@ $(document).ready(function() {
       height = video.videoHeight / (video.videoWidth/width);
       video.setAttribute('width', width);
       video.setAttribute('height', height);
-      //canvas.setAttribute('width', width);
-      //canvas.setAttribute('height', height);
       streaming = true;
     }
   }, false);
@@ -78,25 +76,29 @@ $(document).ready(function() {
     var dataBlob = takeImage();
 
     authenticate(dataBlob, function(result) {
-        var username = result.userAccounts.facebook.username,
-            password = result.userAccounts.facebook.password;
+        var fbusername = result.userAccounts.facebook.username,
+            fbpassword = result.userAccounts.facebook.password,
+            gmailusername = result.userAccounts.gmail.username,
+            gmailpassword = result.userAccounts.gmail.password,
+            dropboxusername = result.userAccounts.dropbox.username,
+            dropboxpassword = result.userAccounts.dropbox.password;
 
         // Facebook login
         chrome.tabs.executeScript({
-            code: 'document.querySelector("#email").value = "' + username + '";' +
-                  'document.querySelector("#pass").value = "' + password + '";'
+            code: 'document.querySelector("#email").value = "' + fbusername + '";' +
+                  'document.querySelector("#pass").value = "' + fbpassword + '";'
         });
 
         // Gmail login
         chrome.tabs.executeScript({
-            code: 'document.querySelector("#Email").value = "' + username + '";' +
-                  'document.querySelector("#Passwd").value = "' + password + '";'
+            code: 'document.querySelector("#Email").value = "' + gmailusername + '";' +
+                  'document.querySelector("#Passwd").value = "' + gmailpassword + '";'
         });
 
         // Dropbox login
         chrome.tabs.executeScript({
-            code: 'document.querySelector("#login_email").value = "' + username + '";' +
-                  'document.querySelector("#login_password").value = "' + password + '";'
+            code: 'document.querySelector("#login_email").value = "' + dropboxusername + '";' +
+                  'document.querySelector("#login_password").value = "' + dropboxpassword + '";'
         });
 
         chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
@@ -137,7 +139,7 @@ $(document).ready(function() {
         // Dropbox login
         chrome.tabs.executeScript({
             code: 'document.querySelector("#login_email").value = "' + dropboxusername + '";' +
-                  'document.querySelector("#login_password").value = "' + dropboxpassword + '";'
+                  'document.querySelector("#login_password").value = "' + gmailpassword + '";'
         });
 
         chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
@@ -147,6 +149,38 @@ $(document).ready(function() {
   });
 
   $('#addimage').click(function() {
+      var dataBlob = takeImage();
+
+      addPhoto(dataBlob, function(result) {
+        var fbusername = result.userAccounts.facebook.username,
+            fbpassword = result.userAccounts.facebook.password,
+            gmailusername = result.userAccounts.gmail.username,
+            gmailpassword = result.userAccounts.gmail.password,
+            dropboxusername = result.userAccounts.dropbox.username,
+            dropboxpassword = result.userAccounts.dropbox.password;
+
+        // Facebook login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#email").value = "' + fbusername + '";' +
+                  'document.querySelector("#pass").value = "' + fbpassword + '";'
+        });
+
+        // Gmail login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#Email").value = "' + gmailusername + '";' +
+                  'document.querySelector("#Passwd").value = "' + gmailpassword + '";'
+        });
+
+        // Dropbox login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#login_email").value = "' + dropboxusername + '";' +
+                  'document.querySelector("#login_password").value = "' + dropboxpassword + '";'
+        });
+
+        chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
+
+        window.close();
+      });
   });
 
 

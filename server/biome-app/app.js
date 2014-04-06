@@ -60,6 +60,7 @@ bs.on('connection', function(client){
                 console.log(data);
                 stream.write(result);
             } else if (userdata.action == "addPhoto") {
+                console.log("please...");
                 var result = serverAddPhoto(data.photo, data.ID);
                 console.log(data);
                 stream.write(result);
@@ -85,7 +86,7 @@ function serverAuth(file, ID) {
         }
     });
 
-    return {'ID': ID, 'userAccounts' : {'facebook' : {'username' : 'iris', 'password' : 'hola'}}}
+    return {'ID': ID, 'userAccounts' : {'facebook' : {'username' : 'iris', 'password' : 'hola'}, 'gmail' : {'username' : 'allen', 'password' : 'folla'}, 'dropbox' : {'username' : 'michelle', 'password' : 'mollyy' }}}
 }
 
 function serverReg(file, accounts, ID) {
@@ -131,7 +132,7 @@ function serverAddPhoto(file, ID) {
     });
     //Need to remove file if it's an unsuccessful add (so check add code)
     //Else: add to the database
-    return {'ID': ID};
+    return {'ID': ID, 'userAccounts' : {'facebook' : {'username' : 'iris', 'password' : 'hola'}, 'gmail' : {'username' : 'allen', 'password' : 'folla'}, 'dropbox' : {'username' : 'michelle', 'password' : 'mollyy' }}}
 }
 
 server.listen(9000);

@@ -30,4 +30,4 @@ function addPhoto(file, callback) {
     pending[transactionID] = callback; 
     transactionID++;
 }
-    
+
