@@ -1,6 +1,6 @@
 body {
     width: 600px;
-    height: 240px;
+    height: 260px;
 }
 
 img {
@@ -39,6 +39,12 @@ input {
 }
 form {
 	padding: 10px;
+}
+
+#top-buttons {
+	left: 39%;
+	position: relative;
+	/*display: block;*/
 }
 
 #vid {
