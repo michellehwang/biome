@@ -1,6 +1,7 @@
 body {
     width: 480px;
     height: 240px;
+    text-align: center;
 }
 
 img {
@@ -21,4 +22,8 @@ img {
 	opacity: .7;
 	/*width: auto;*/
 	border-bottom: 40px solid white;
+}
+
+#content {
+    margin: auto;
 }

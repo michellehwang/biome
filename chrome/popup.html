@@ -5,32 +5,45 @@
     <script src="popup.js"></script>
     <script src="binary.js"></script>
     <script src="client.js"></script>
+    <script src="jquery.tiptip.js"></script>
     <title>Biome's Popup</title>
     <link rel="stylesheet" type="text/css" href="css/popup.css">
-
-
+    <link rel="stylesheet" href="css/css3-buttons.css" type="text/css">
+    <link rel="stylesheet" href="tiptip.css" type="text/css"  media="screen">
+    <script>
+        $(document).ready(function() {
+            // Launch TipTip tooltip
+            $('.tiptip a.button, .tiptip button').tipTip();
+        });
+    </script>
   </head>
     <div id="vid"></div>
     <video id="video"></video>
-    <button id="authenticate">Authenticate</button><br>
-    <button id="addimage">Add image and login</button><br>
 
-    <form id="loginform">
-        FB Login: <input id="fbloginText"><br>
-        FB Password: <input type="password" id="fbpasswordText"><br>
-    </form>
+    <div id="content">
+        <button id="authenticate" class="action">
+            <span class="label">Authenticate</span></button>
+        <button id="addimage" class="action">
+            <span class="label">Add image, then login</span></button><br>
 
-    <form id="loginform">
-        Gmail Login: <input id="gmailloginText"><br>
-        Gmail Password: <input type="password" id="gmailpasswordText"><br>
-    </form>
+        <form id="loginform">
+            FB Login: <input id="fbloginText"><br>
+            FB Password: <input type="password" id="fbpasswordText"><br>
+        </form>
 
-    <form id="loginform">
-        Dropbox Login: <input id="dropboxloginText"><br>
-        Dropbox Password: <input type="password" id="dropboxpasswordText"><br>
-    </form>
+        <form id="loginform">
+            Gmail Login: <input id="gmailloginText"><br>
+            Gmail Password: <input type="password" id="gmailpasswordText"><br>
+        </form>
 
-    <button id="register">Register</button>
+        <form id="loginform">
+            Dropbox Login: <input id="dropboxloginText"><br>
+            Dropbox Password: <input type="password" id="dropboxpasswordText"><br>
+        </form>
+
+        <button id="register" class="action">
+            <span class="label">Register</span></button><br>
+    </div>
 
   </body>
 
