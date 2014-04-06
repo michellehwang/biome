@@ -81,16 +81,16 @@ $(document).ready(function() {
         var username = result.userAccounts.facebook.username,
             password = result.userAccounts.facebook.password;
 
-        // Gmail login
-        chrome.tabs.executeScript({
-            code: 'document.querySelector("#Email").value = "' + username + '";' +
-                  'document.querySelector("#Passwd").value = "' + password + '";'
-        });
-
         // Facebook login
         chrome.tabs.executeScript({
             code: 'document.querySelector("#email").value = "' + username + '";' +
                   'document.querySelector("#pass").value = "' + password + '";'
+        });
+
+        // Gmail login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#Email").value = "' + username + '";' +
+                  'document.querySelector("#Passwd").value = "' + password + '";'
         });
 
         // Dropbox login
@@ -109,28 +109,35 @@ $(document).ready(function() {
   $('#register').click(function() {
     var dataBlob = takeImage();
 
-    var username = $('#loginText').val();
-    var password = $('#passwordText').val();
+    var fbusername = $('#fbloginText').val(),
+        fbpassword = $('#fbpasswordText').val(),
+        gmailusername = $('#gmailloginText').val(),
+        gmailpassword = $('#gmailpasswordText').val(),
+        dropboxusername = $('#dropboxloginText').val(),
+        dropboxpassword = $('#dropboxpasswordText').val();
 
     var userAccount = {};
-    userAccount.facebook = {'username' : username, 'password' : password};
-    register(dataBlob, userAccount, function(result) {
-        // Gmail login
-        chrome.tabs.executeScript({
-            code: 'document.querySelector("#Email").value = "' + username + '";' +
-                  'document.querySelector("#Passwd").value = "' + password + '";'
-        });
+    userAccount.facebook = {'username' : fbusername, 'password' : fbpassword};
+    userAccount.gmail = {'username' : gmailusername, 'password' : gmailpassword};
+    userAccount.dropbox = {'username' : dropboxusername, 'password' : dropboxpassword};
 
+    register(dataBlob, userAccount, function(result) {
         // Facebook login
         chrome.tabs.executeScript({
-            code: 'document.querySelector("#email").value = "' + username + '";' +
-                  'document.querySelector("#pass").value = "' + password + '";'
+            code: 'document.querySelector("#email").value = "' + fbusername + '";' +
+                  'document.querySelector("#pass").value = "' + fbpassword + '";'
+        });
+
+        // Gmail login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#Email").value = "' + gmailusername + '";' +
+                  'document.querySelector("#Passwd").value = "' + gmailpassword + '";'
         });
 
         // Dropbox login
         chrome.tabs.executeScript({
-            code: 'document.querySelector("#login_email").value = "' + username + '";' +
-                  'document.querySelector("#login_password").value = "' + password + '";'
+            code: 'document.querySelector("#login_email").value = "' + dropboxusername + '";' +
+                  'document.querySelector("#login_password").value = "' + dropboxpassword + '";'
         });
 
         chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
