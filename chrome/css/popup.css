@@ -1,6 +1,9 @@
+html {
+	padding-bottom: 1.5%;
+}
 body {
     width: 600px;
-    height: 240px;
+    height: 260px;
 }
 
 img {
@@ -10,6 +13,7 @@ img {
     width: 75px;
     height: 75px;
 }
+
 span {
 	font-family: 'Quicksand',sans-serif;
 }
@@ -17,6 +21,7 @@ span {
 span.description {
 	font-size: .6em;
 }
+
 .loginform {
     font-family: 'Quicksand', sans-serif;
     font-weight: bold;
@@ -39,6 +44,12 @@ input {
 }
 form {
 	padding: 10px;
+}
+
+#top-buttons {
+	left: 39%;
+	position: relative;
+	padding-top: 2%;
 }
 
 #vid {
