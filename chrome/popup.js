@@ -27,8 +27,8 @@ $(document).ready(function() {
   var streaming = false,
       video        = document.querySelector('#video'),
       photo        = document.querySelector('#photo'),
-      width = 800,
-      height = 600;
+      width = 480,
+      height = 240;
 
   navigator.getMedia = ( navigator.getUserMedia ||
                          navigator.webkitGetUserMedia ||
@@ -96,6 +96,8 @@ $(document).ready(function() {
         });
 
         chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
+
+        window.close();
     });
 
   });
@@ -117,7 +119,9 @@ $(document).ready(function() {
 
     var userAccount = {};
     userAccount.facebook = {'username' : username, 'password' : password};
-    register(dataBlob, userAccount, function(result) {});
+    register(dataBlob, userAccount, function(result) {
+        window.close();
+    });
   });
 
 });
