@@ -136,11 +136,12 @@ function serverAddPhoto(file, ID) {
     //Else: add to the database
     return {'ID': ID, 'userAccounts' : {'facebook' : {'username' : 'iris', 'password' : 'hola'}, 'gmail' : {'username' : 'allen', 'password' : 'folla'}, 'dropbox' : {'username' : 'michelle', 'password' : 'mollyy' }}}
 }
+
 function findIdByPath(imgPath, callback) {
     var cb = callback;
-    var usr = User.find({imgPaths:imgPath}, function(err, users) {
+    var usr = User.find({imgPaths:imgPath}, function(err, user) {
         if (users.length > 0) {
-            callback(users[0]); return;
+            callback(user); return;
         }
         callback(null);
     });
