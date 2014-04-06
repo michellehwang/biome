@@ -195,7 +195,7 @@ $(document).ready(function() {
     function takeImage() {
         var canvas = document.createElement("canvas");
         canvas.id = 'canvas';
-        document.body.insertBefore(canvas, document.body.childNodes[0]);
+        document.body.insertBefore(canvas, document.body.childNodes[3]);
 
         var opts = {
           lines: 11, // The number of lines to draw
@@ -216,7 +216,7 @@ $(document).ready(function() {
           left: 'auto' // Left position relative to parent in px
         };
         var spinner = new Spinner(opts).spin();
-        document.body.insertBefore(spinner.el, document.body.childNodes[0]);
+        document.body.insertBefore(spinner.el, document.body.childNodes[3]);
 
         canvas.width = width;
         canvas.height = height;

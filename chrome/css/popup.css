@@ -2,7 +2,7 @@ html {
 	padding-bottom: 1.5%;
 }
 body {
-    width: 600px;
+    width: 480;
     height: 260px;
 }
 
@@ -16,6 +16,19 @@ img {
 
 span {
 	font-family: 'Quicksand',sans-serif;
+}
+
+#header-logo {
+	width: 100%;
+	background-color: #689343;
+	height: 10px;
+}
+#logo {
+	height: 50px;
+	/*width: 300px;*/
+	width: auto;
+	border: none;
+	padding-bottom: 4px;
 }
 
 span.description {
@@ -53,7 +66,6 @@ form {
 }
 
 #vid {
-	left: 11%;
 	z-index: 10;
     background: url('../images/overlay.png') no-repeat;
     background-size: 480px 240px;
@@ -65,26 +77,31 @@ form {
 }
 
 .spinner {
-    top: 34%;
+	vertical-align: center;
+    top: 45%;
     left: 50%;
 	z-index: 10;
     position: absolute;
 }
 
-#video {
-    left: 10%;
+video {
+	transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+    -moz-transform:rotateY(180deg); /* Firefox */
     position: relative;
 }
 
 #canvas {
-    left: 10%;
+	transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+    -moz-transform:rotateY(180deg); /* Firefox */
     position: relative;
 }
 
 #forms {
 	position: relative;
     display: block;
-    left: 15%;
+    left: 5%;
 }
 
 #newuser {
@@ -101,5 +118,5 @@ form {
 button#register {
 	position: relative;
 	bottom: 31px;
-	right: -55%;
+	right: -69%;
 }

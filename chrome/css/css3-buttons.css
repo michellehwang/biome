@@ -191,10 +191,10 @@ button.green,
 	border: 1px solid #29691D !important;
 	
 	background: #3A8E00;
-	background: -webkit-linear-gradient(top, #3C9300, #398A00);
-	background: -moz-linear-gradient(top, #3C9300, #398A00);
-	background: -ms-linear-gradient(top, #3C9300, #398A00);
-	background: -o-linear-gradient(top, #3C9300, #398A00);
+	background: -webkit-linear-gradient(top, #689343, #689343);
+	background: -moz-linear-gradient(top, #689343, #689343);
+	background: -ms-linear-gradient(top, #689343, #689343);
+	background: -o-linear-gradient(top, #689343, #689343);
 	
 	-webkit-transition: border .20s;
 	-moz-transition: border .20s;
@@ -206,10 +206,10 @@ button.green:hover,
 	border: 1px solid #2D6200 !important;
 	
 	background: #3F83F1;
-	background: -webkit-linear-gradient(top, #3C9300, #368200);
-	background: -moz-linear-gradient(top, #3C9300, #368200);
-	background: -ms-linear-gradient(top, #3C9300, #368200);
-	background: -o-linear-gradient(top, #3C9300, #368200);
+	background: -webkit-linear-gradient(top, #689343, #368200);
+	background: -moz-linear-gradient(top, #689343, #368200);
+	background: -ms-linear-gradient(top, #689343, #368200);
+	background: -o-linear-gradient(top, #689343, #368200);
 }
 button.red, 
 .button.red {
