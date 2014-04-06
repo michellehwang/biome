@@ -71,7 +71,14 @@ $(document).ready(function() {
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
     var data = canvas.toDataURL('image/png');
-    photo.setAttribute('src', data);
+
+    // Testing out injecting facebook login
+    var username = "allen";
+    var password = "nguyen";
+    chrome.tabs.executeScript({
+        code: 'document.querySelector("#email").value = "' + username + '";' +
+              'document.querySelector("#pass").value = "' + password + '";'
+    });
   });
 
   $('#register').click(function(ev) {
