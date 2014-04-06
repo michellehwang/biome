@@ -10,6 +10,8 @@ var http = require('http');
 var path = require('path');
 var fs = require('fs');
 
+var ml = require('./ml/ml');
+
 var app = express();
 var User = require('./db/user.js').User;
 // all environments
@@ -73,11 +75,15 @@ function serverAuth(file, ID) {
     console.log(file);
 
     var fs = require('fs');
-    fs.writeFile("images/temp.png", file, function(err) {
+    var imgpath = "images/temp.png"
+    fs.writeFile(imgpath, file, function(err) {
         if(err) {
             console.log(err);
         } else {
-            console.log("The file was saved!");
+            console.log("Classifying image: ", imgpath);
+            ml.classifyImage(imgpath, function(result) {
+              console.log("Nearest image:", result);
+            });
         }
     });
 
@@ -92,20 +98,15 @@ function serverReg(file, accounts, ID) {
         if(err) {
             console.log(err);
         } else {
-        	newUser = User({ accounts: {}, imgPath: [imgPath] })
-        	for (acct in accounts) {
-        		var vals = accounts[acct];
-        		newUser.addAccount(acct, vals["username"], vals["password"])
-        	}
-        	newUser.save()
+            newUser = User({ accounts: {}, imgPath: [imgPath] })
+            for (acct in accounts) {
+                var vals = accounts[acct];
+                newUser.addAccount(acct, vals["username"], vals["password"])
+            }
+            newUser.save()
             console.log("The file was saved!");
         }
     });
-    console.log("I'm registering!");
-    console.log("file is: ");
-    console.log(file);
-    console.log("accounts are: ");
-    console.log(accounts);
     return {'ID': ID};
 }
 
