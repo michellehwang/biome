@@ -4,7 +4,7 @@ var Account = require('./account.js').Account;
 var userSchema = mongoose.Schema({
 	uid: Number,
 	name: String,
-    imgPaths: Array,
+    imgPath: Array,
     accounts: Object,
 }, {
   collection: "user"

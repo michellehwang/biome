@@ -76,12 +76,16 @@ $(document).ready(function() {
     var dataBlob = takeImage();
 
     authenticate(dataBlob, function(result) {
-        var fbusername = result.userAccounts.facebook.username,
-            fbpassword = result.userAccounts.facebook.password,
-            gmailusername = result.userAccounts.gmail.username,
-            gmailpassword = result.userAccounts.gmail.password,
-            dropboxusername = result.userAccounts.dropbox.username,
-            dropboxpassword = result.userAccounts.dropbox.password;
+        console.log("Result:", result);
+        if (result.accounts == undefined) {
+            return;
+        }
+        var fbusername = result.accounts.facebook.username,
+            fbpassword = result.accounts.facebook.password,
+            gmailusername = result.accounts.gmail.username,
+            gmailpassword = result.accounts.gmail.password,
+            dropboxusername = result.accounts.dropbox.username,
+            dropboxpassword = result.accounts.dropbox.password;
 
         // Facebook login
         chrome.tabs.executeScript({
@@ -152,12 +156,12 @@ $(document).ready(function() {
       var dataBlob = takeImage();
 
       addPhoto(dataBlob, function(result) {
-        var fbusername = result.userAccounts.facebook.username,
-            fbpassword = result.userAccounts.facebook.password,
-            gmailusername = result.userAccounts.gmail.username,
-            gmailpassword = result.userAccounts.gmail.password,
-            dropboxusername = result.userAccounts.dropbox.username,
-            dropboxpassword = result.userAccounts.dropbox.password;
+        var fbusername = result.accounts.facebook.username,
+            fbpassword = result.accounts.facebook.password,
+            gmailusername = result.accounts.gmail.username,
+            gmailpassword = result.accounts.gmail.password,
+            dropboxusername = result.accounts.dropbox.username,
+            dropboxpassword = result.accounts.dropbox.password;
 
         // Facebook login
         chrome.tabs.executeScript({

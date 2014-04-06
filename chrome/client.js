@@ -8,26 +8,26 @@ client.on('open', function() {
     stream.on('data', function(data) {
         console.log("Received data:", data);
         var funct = pending[data.ID];
-        funct(data); 
+        funct(data);
     });
 });
 
 
 function register(file, userAccounts, callback) {
     stream.write({photo: file, action: 'register', accounts: userAccounts, ID: transactionID});
-    pending[transactionID] = callback; 
+    pending[transactionID] = callback;
     transactionID++;
 }
 
 function authenticate(file, callback) {
     stream.write({ID: transactionID, photo: file, action: 'authenticate'});
-    pending[transactionID] = callback; 
+    pending[transactionID] = callback;
     transactionID++;
 }
 
 function addPhoto(file, callback) {
     stream.write({ID: transactionID, photo: file, action: 'addPhoto'});
-    pending[transactionID] = callback; 
+    pending[transactionID] = callback;
     transactionID++;
 }
 
