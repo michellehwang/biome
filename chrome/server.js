@@ -18,8 +18,10 @@ bs.on('connection', function(client){
     client.on('stream', function(stream){
         stream.on('data', function(data){
             var userdata = data;
+            console.log(userdata);
             if (userdata.action == 'register') {
                 serverReg(data.photo, data.accounts);
+                stream.write({ID : userdata.ID});
                 console.log(data);
             } else if (userdata.action == 'authenticate') {
                 var result = serverAuth(data.photo, data.ID);
@@ -47,7 +49,7 @@ function serverAuth(file, ID) {
         }
     }); 
 
-    return {'userAccounts' : {'facebook' : {'username' : 'iris', 'password' : 'hola'}}}
+    return {'ID' : ID, 'userAccounts' : {'facebook' : {'username' : 'iris', 'password' : 'hola'}}}
 }
 
 function serverReg(file, accounts) {
