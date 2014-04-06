@@ -1,4 +1,5 @@
 var client = new BinaryClient('ws://localhost:9000');
+console.log(client);
 var stream;
 var transactionID = 0;
 var pending = {};

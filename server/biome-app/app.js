@@ -52,6 +52,12 @@ bs.on('connection', function(client){
     console.log("Connection");
     // Incoming stream from browsers
     client.on('stream', function(stream){
+        stream.on('close', function() {
+          console.log("Stream closing");
+        })
+        stream.on('error', function(err) {
+          console.log(err)
+        })
         stream.on('data', function(data){
             var userdata = data;
             console.log(data);

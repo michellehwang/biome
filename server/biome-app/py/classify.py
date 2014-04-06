@@ -18,7 +18,7 @@ if __name__ == "__main__":
     classifier = load('rf')
     prediction = classifier.predict(vector)
     print >>sys.stderr, prediction
-    if abs(prediction[2][0]  - prediction[2][1]) <= 0.1:
+    if abs(prediction[2][0]  - prediction[2][1]) <= 0.05:
         print >>sys.stderr, "Doubt"
         exit(-1)
     print prediction[1].split('/')[-1]

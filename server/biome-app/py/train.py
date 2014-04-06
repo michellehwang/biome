@@ -44,7 +44,7 @@ if __name__ == "__main__":
     y = np.matrix(y)
     data = Collection(X, y)
 
-    classifier = RF(100, files)
+    classifier = RF(50, files)
     classifier.train(data)
     save(classifier, 'rf')
 
