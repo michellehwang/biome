@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+
+  "name": "Biome",
+  "description": "Biometric detection auth",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+
+  "permissions": [
+    "tabs", "http://www.facebook.com/*", "activeTab"
+      ],
+
+  "options_page": "options.html"
+}

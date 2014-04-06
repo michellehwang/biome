@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="jquery.js"></script>
+    <script src="popup.js"></script>
+    <script src="binary.js"></script>
+    <script src="client.js"></script>
+    <title>Biome's Popup</title>
+    <style>
+      body {
+        min-width: 320px;
+        overflow: hidden;
+      }
+
+      img {
+        margin: 5px;
+        border: 2px solid black;
+        vertical-align: middle;
+        width: 75px;
+        height: 75px;
+      }
+    </style>
+
+  </head>
+    <video id="video"></video>
+    <button id="authenticate">Authenticate</button>
+    <button id="register">Register</button>
+    <canvas id="canvas"></canvas>
+
+    <form id="loginform" style="display:none">
+        FB Login: <input id="loginText"><br>
+        FB Password: <input type="password" id="passwordText"><br>
+        <button id="submit">Submit</button>
+    </form>
+
+  </body>
+
+</html>
+
