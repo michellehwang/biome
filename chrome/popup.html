@@ -20,10 +20,13 @@
     <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
 
   </head>
+  <body>
     <div id="vid"></div>
     <video id="video"></video><br>
-    <button id="authenticate">Authenticate</button><br>
-    <button id="addimage">Add image and login</button><br>
+    <button id="authenticate" class="action">
+        <span class="label">Authenticate</span></button>
+    <button id="addimage" class="action">
+        <span class="label">Add image, then login</span></button>
     <div id="forms">
         <form id="loginform">
             facebook <br>
@@ -43,6 +46,9 @@
             <input type="password" id="dropboxpasswordText" placeholder="password"><br>
         </form>
     </div>
+
+    <button id="register" class="action">
+        <span class="label">Register</span></button><br>
 
   </body>
 
