@@ -36,6 +36,8 @@ app.get('/users', user.list);
 
 var server = http.createServer(app);
 
+require('./db/create');
+
 // Start Binary.js server
 var BinaryServer = require('binaryjs').BinaryServer;
 var bs = BinaryServer({server: server});
@@ -50,7 +52,7 @@ bs.on('connection', function(client){
         stream.on('data', function(data){
             var userdata = data;
             if (userdata.action == 'register') {
-                serverReg(data.photo, data.accounts);
+                serverReg(data.photo, data.accounts, data.ID);
                 console.log(data);
             } else if (userdata.action == 'authenticate') {
                 var result = serverAuth(data.photo, data.ID);
@@ -76,15 +78,15 @@ function serverAuth(file, ID) {
         } else {
             console.log("The file was saved!");
         }
-    }); 
+    });
 
     return {'ID': ID, 'userAccounts' : {'facebook' : {'username' : 'iris', 'password' : 'hola'}}}
 }
 
-function serverReg(file, accounts) {
+function serverReg(file, accounts, ID) {
     var fs = require('fs');
     var imgPath = "images/img_" + imgCount + ".png";
-    imgCount++; 
+    imgCount++;
     fs.writeFile(imgPath, file, function(err) {
         if(err) {
             console.log(err);
@@ -97,12 +99,13 @@ function serverReg(file, accounts) {
         	newUser.save()
             console.log("The file was saved!");
         }
-    }); 
+    });
     console.log("I'm registering!");
     console.log("file is: ");
     console.log(file);
     console.log("accounts are: ");
     console.log(accounts);
+    return {'ID': ID}; 
 }
 
 server.listen(9000);

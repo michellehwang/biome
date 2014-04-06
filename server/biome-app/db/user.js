@@ -5,6 +5,8 @@ var userSchema = mongoose.Schema({
 	name: String,
     imgPath: Array,
     accounts: Object,
+}, {
+  collection: "user"
 })
 
 userSchema.methods.deleteAccount = function (id) {
@@ -12,6 +14,7 @@ userSchema.methods.deleteAccount = function (id) {
 }
 
 userSchema.methods.addAccount = function (acct, uname, pwd) {
+  console.log("Adding accts")
 	newAcct = new Account({ username : uname, password : pwd });
 	console.log(this)
 	this.accounts[acct] = newAcct
@@ -22,10 +25,10 @@ userSchema.methods.addImgPath = function (img_path) {
 }
 
 // userSchema.methods.addImgPath = function (id, img_path)
-	
+
 
 // userSchema.statics.getUserById = function(id) {
-// 	for user in 
+// 	for user in
 // }
 var User = mongoose.model('User', userSchema)
 exports.User = User
