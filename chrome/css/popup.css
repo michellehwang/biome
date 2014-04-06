@@ -10,11 +10,17 @@ img {
     width: 75px;
     height: 75px;
 }
+span {
+	font-family: 'Quicksand',sans-serif;
+}
 
-#loginform {
+span.description {
+	font-size: .6em;
+}
+.loginform {
     font-family: 'Quicksand', sans-serif;
     font-weight: bold;
-    display: inline-block;
+    display: table-cell;
     padding: .5em;
     background-color: #C1C5C9;
     -webkit-box-shadow: 0px 2px 2px gray;
@@ -31,16 +37,19 @@ input {
     direction: ltr;
 
 }
+form {
+	padding: 10px;
+}
 
 #vid {
+	left: 11%;
+	z-index: 10;
     background: url('../images/overlay.png') no-repeat;
     background-size: 480px 240px;
     height: 240px;
     width: 480px;
     position: absolute;
-    /*background-color: #BBBDC0;*/
     opacity: .5;
-    /*width: auto;*/
     border-bottom: 40px solid white;
 }
 
@@ -50,7 +59,24 @@ video{
 }
 
 #forms {
-    text-align: center;
-    display:table;
-    left: 10%;
+	position: relative;
+    display: block;
+    left: 15%;
+}
+
+#newuser {
+	bottom: 2px;
+	float:right;
+	position: relative;
+	height: 75%;
+}
+
+#forms.hide {
+	display: none;
+}
+
+button#register {
+	position: relative;
+	bottom: 31px;
+	right: -55%;
 }

@@ -139,7 +139,7 @@ $(document).ready(function() {
         // Dropbox login
         chrome.tabs.executeScript({
             code: 'document.querySelector("#login_email").value = "' + dropboxusername + '";' +
-                  'document.querySelector("#login_password").value = "' + gmailpassword + '";'
+                  'document.querySelector("#login_password").value = "' + dropboxpassword + '";'
         });
 
         chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
@@ -147,6 +147,10 @@ $(document).ready(function() {
         window.close();
     });
   });
+
+  $("#newuser").click(function(evt) {
+    $("div#forms").toggleClass("hide");
+  })
 
   $('#addimage').click(function() {
       var dataBlob = takeImage();
@@ -199,4 +203,6 @@ $(document).ready(function() {
 
         return dataURLtoBlob(uri);
     };
+
+
 });
