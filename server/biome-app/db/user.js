@@ -8,25 +8,16 @@ var userSchema = mongoose.Schema({
 })
 
 userSchema.methods.deleteAccount = function (id) {
-    User.find({_id: id}, function(err, results) {
-    	if (err != null) {
-    		for (res in results) {
-    			results[res].remove()
-    		}
-    	}
-    })
-    // if (this.accounts.acct) {
-    // 	console.log('hi')
-    //     delete this.accounts.acct
-    //     console.log("accounts\n" + this.accounts )
-    // } else {
-    //     console.log("Error: account does not exist")
-    // }
+	delete this.accounts[id]
 }
 
 userSchema.methods.addAccount = function (acct, uname, pwd) {
 	newAcct = new Account({ username : uname, password : pwd, "what": "waht" });
 	this.accounts[acct] = newAcct
+}
+
+userSchema.methods.addImgPath = function (img_path) {
+	this.img_path.append(img_path);
 }
 
 // userSchema.methods.addImgPath = function (id, img_path)

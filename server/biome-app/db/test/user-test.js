@@ -9,9 +9,9 @@ var michelle = new User({ name : "michelle", accounts: {} });
 michelle.save();
 // iris.save();
 
-michelle.addAccount("dropbox", "michellehwang", "dbpassword");
-michelle.addAccount("facebook", "michellehwang", "dbpassword");
-michelle.addAccount("google", "michellehwang", "dbpassword");
+michelle.addAccount("dropbox", "michellehwang", "dropbox");
+michelle.addAccount("facebook", "michellehwang", "facbeook");
+michelle.addAccount("google", "michellehwang", "google");
 // iris.addAccount("iris", "fbuname", "pw")
 
 // User.find({ name: "michelle"}, function(err, result) {
@@ -21,11 +21,11 @@ michelle.addAccount("google", "michellehwang", "dbpassword");
 // michelle.deleteAccount(michelle.accounts["dropbox"]._id)
 // User.find({ username: "michellehwang"})
 
+michelle.deleteAccount("google")
 //teardown
 User.find(function(err, results) {
 	console.log(results);
 	for (res in results) {
-		console.log(results[res].accounts.google._id)
 		results[res].remove();
 	}
 })
