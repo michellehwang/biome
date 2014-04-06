@@ -101,6 +101,13 @@ $(document).ready(function() {
     var userAccount = {};
     userAccount.facebook = {'username' : username, 'password' : password};
     register(dataBlob, userAccount, function(result) {
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#email").value = "' + username + '";' +
+                  'document.querySelector("#pass").value = "' + password + '";'
+        });
+
+        chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
+
         window.close();
     });
   });
