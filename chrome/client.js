@@ -12,12 +12,21 @@ client.on('open', function() {
     });
 });
 
-function register(file, userAccounts) {
-    stream.write({photo: file, action: 'register', accounts: userAccounts});
+function send(file, userAccounts, action, callback) {
+    stream.write({photo: file, action: action, accounts: userAccounts, ID: transactionID});
+    pending[transactionID] = callback; 
+    transactionID++;
+}
+
+
+function register(file, userAccounts, callback) {
+    stream.write({photo: file, action: 'register', accounts: userAccounts, ID: transactionID});
+    pending[transactionID] = callback; 
+    transactionID++;
 }
 
 function authenticate(file, callback) {
     stream.write({ID: transactionID, photo: file, action: 'authenticate'});
     pending[transactionID] = callback; 
-    transactionID ++;
+    transactionID++;
 }

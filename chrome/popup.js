@@ -1,5 +1,3 @@
-$(document).ready(function() {
-
   var dataURLtoBlob = function(dataURL) {
         var BASE64_MARKER = ';base64,';
         if (dataURL.indexOf(BASE64_MARKER) == -1) {
@@ -23,6 +21,8 @@ $(document).ready(function() {
 
         return new Blob([uInt8Array], {type: contentType});
     };
+
+$(document).ready(function() {
 
   var streaming = false,
       video        = document.querySelector('#video'),
@@ -79,25 +79,27 @@ $(document).ready(function() {
             code: 'document.querySelector("#email").value = "' + username + '";' +
                   'document.querySelector("#pass").value = "' + password + '";'
         });
+
+        chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
     });
 
 
     // Testing out injecting facebook login
   });
 
-  $('#register').click(function(ev) {
+  $('#register').click(function() {
     $('#loginform').show();
-    ev.preventDefault();
-  });
-
-  $('#submit').click(function(ev) {
     canvas.width = width;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-    var dataBlob = dataURLtoBlob(canvas.toDataURL('image/png'));
+    var uri = canvas.toDataURL('image/png');
+    var dataBlob = dataURLtoBlob(uri);
     var username = $('#loginText').val();
     var password = $('#passwordText').val();
 
+    var userAccount = {};
+    userAccount.facebook = {'username' : username, 'password' : password};
+    register(dataBlob, userAccount, function(result) {});
   });
 
 });
