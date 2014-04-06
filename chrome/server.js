@@ -19,10 +19,10 @@ bs.on('connection', function(client){
         stream.on('data', function(data){
             var userdata = data;
             if (userdata.action == 'register') {
-                register(data.photo, data.accounts);
+                serverReg(data.photo, data.accounts);
                 console.log(data);
             } else if (userdata.action == 'authenticate') {
-                var result = authenticate(data.photo, data.ID);
+                var result = serverAuth(data.photo, data.ID);
                 console.log(data);
                 stream.write(result);
             } else {
@@ -33,14 +33,14 @@ bs.on('connection', function(client){
     });
 });
 
-function authenticate(file, ID) {
+function serverAuth(file, ID) {
     console.log("I'm authenticating!");
     console.log("file is: ");
     console.log(file);
     return {"ID": ID, "username": "iris", "password": "hola"};
 }
 
-function register(file, accounts) {
+function serverReg(file, accounts) {
     console.log("I'm registering!");
     console.log("file is: ");
     console.log(file);
