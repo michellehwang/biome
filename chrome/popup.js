@@ -68,31 +68,37 @@ $(document).ready(function() {
       height = video.videoHeight / (video.videoWidth/width);
       video.setAttribute('width', width);
       video.setAttribute('height', height);
-      //canvas.setAttribute('width', width);
-      //canvas.setAttribute('height', height);
       streaming = true;
     }
   }, false);
 
   $('#authenticate').click(function(){
-    var canvas = document.createElement("canvas");
-    canvas.id = "canvas";
-    document.body.insertBefore(canvas, document.body.childNodes[0]);
-
-    canvas.width = width;
-    canvas.height = height;
-    $("#video").hide();
-    $("#vid").hide();
-
-    canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-    var dataBlob = dataURLtoBlob(canvas.toDataURL('image/png'));
+    var dataBlob = takeImage();
 
     authenticate(dataBlob, function(result) {
-        var username = result.userAccounts.facebook.username,
-            password = result.userAccounts.facebook.password;
+        var fbusername = result.userAccounts.facebook.username,
+            fbpassword = result.userAccounts.facebook.password,
+            gmailusername = result.userAccounts.gmail.username,
+            gmailpassword = result.userAccounts.gmail.password,
+            dropboxusername = result.userAccounts.dropbox.username,
+            dropboxpassword = result.userAccounts.dropbox.password;
+
+        // Facebook login
         chrome.tabs.executeScript({
-            code: 'document.querySelector("#email").value = "' + username + '";' +
-                  'document.querySelector("#pass").value = "' + password + '";'
+            code: 'document.querySelector("#email").value = "' + fbusername + '";' +
+                  'document.querySelector("#pass").value = "' + fbpassword + '";'
+        });
+
+        // Gmail login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#Email").value = "' + gmailusername + '";' +
+                  'document.querySelector("#Passwd").value = "' + gmailpassword + '";'
+        });
+
+        // Dropbox login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#login_email").value = "' + dropboxusername + '";' +
+                  'document.querySelector("#login_password").value = "' + dropboxpassword + '";'
         });
 
         chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
@@ -103,25 +109,94 @@ $(document).ready(function() {
   });
 
   $('#register').click(function() {
-    $('#loginform').show();
-    var canvas = document.createElement("canvas");
-    canvas.id = "canvas";
-    document.body.insertBefore(canvas, document.body.childNodes[0]);
-    canvas.width = width;
-    canvas.height = height;
-    $("#video").hide();
-    $("#vid").hide();
-    canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-    var uri = canvas.toDataURL('image/png');
-    var dataBlob = dataURLtoBlob(uri);
-    var username = $('#loginText').val();
-    var password = $('#passwordText').val();
+    var dataBlob = takeImage();
+
+    var fbusername = $('#fbloginText').val(),
+        fbpassword = $('#fbpasswordText').val(),
+        gmailusername = $('#gmailloginText').val(),
+        gmailpassword = $('#gmailpasswordText').val(),
+        dropboxusername = $('#dropboxloginText').val(),
+        dropboxpassword = $('#dropboxpasswordText').val();
 
     var userAccount = {};
-    userAccount.facebook = {'username' : username, 'password' : password};
+    userAccount.facebook = {'username' : fbusername, 'password' : fbpassword};
+    userAccount.gmail = {'username' : gmailusername, 'password' : gmailpassword};
+    userAccount.dropbox = {'username' : dropboxusername, 'password' : dropboxpassword};
+
     register(dataBlob, userAccount, function(result) {
+        // Facebook login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#email").value = "' + fbusername + '";' +
+                  'document.querySelector("#pass").value = "' + fbpassword + '";'
+        });
+
+        // Gmail login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#Email").value = "' + gmailusername + '";' +
+                  'document.querySelector("#Passwd").value = "' + gmailpassword + '";'
+        });
+
+        // Dropbox login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#login_email").value = "' + dropboxusername + '";' +
+                  'document.querySelector("#login_password").value = "' + gmailpassword + '";'
+        });
+
+        chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
+
         window.close();
     });
   });
 
+  $('#addimage').click(function() {
+      var dataBlob = takeImage();
+
+      addPhoto(dataBlob, function(result) {
+        var fbusername = result.userAccounts.facebook.username,
+            fbpassword = result.userAccounts.facebook.password,
+            gmailusername = result.userAccounts.gmail.username,
+            gmailpassword = result.userAccounts.gmail.password,
+            dropboxusername = result.userAccounts.dropbox.username,
+            dropboxpassword = result.userAccounts.dropbox.password;
+
+        // Facebook login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#email").value = "' + fbusername + '";' +
+                  'document.querySelector("#pass").value = "' + fbpassword + '";'
+        });
+
+        // Gmail login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#Email").value = "' + gmailusername + '";' +
+                  'document.querySelector("#Passwd").value = "' + gmailpassword + '";'
+        });
+
+        // Dropbox login
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#login_email").value = "' + dropboxusername + '";' +
+                  'document.querySelector("#login_password").value = "' + dropboxpassword + '";'
+        });
+
+        chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
+
+        window.close();
+      });
+  });
+
+
+    function takeImage() {
+        var canvas = document.createElement("canvas");
+        canvas.id = "canvas";
+        document.body.insertBefore(canvas, document.body.childNodes[0]);
+
+        canvas.width = width;
+        canvas.height = height;
+        $("#video").hide();
+        $("#vid").hide();
+
+        canvas.getContext('2d').drawImage(video, 0, 0, width, height);
+        var uri = canvas.toDataURL('image/png');
+
+        return dataURLtoBlob(uri);
+    };
 });

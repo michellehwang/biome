@@ -45,6 +45,7 @@ var BinaryServer = require('binaryjs').BinaryServer;
 var bs = BinaryServer({server: server});
 
 var imgCount = 0;
+var userId = 0;
 
 // Wait for new user connections
 bs.on('connection', function(client){
@@ -59,6 +60,11 @@ bs.on('connection', function(client){
                 console.log(data);
             } else if (userdata.action == 'authenticate') {
                 var result = serverAuth(data.photo, data.ID);
+                console.log(data);
+                stream.write(result);
+            } else if (userdata.action == "addPhoto") {
+                console.log("please...");
+                var result = serverAddPhoto(data.photo, data.ID);
                 console.log(data);
                 stream.write(result);
             } else {
@@ -87,7 +93,7 @@ function serverAuth(file, ID) {
         }
     });
 
-    return {'ID': ID, 'userAccounts' : {'facebook' : {'username' : 'iris', 'password' : 'hola'}}}
+    return {'ID': ID, 'userAccounts' : {'facebook' : {'username' : 'iris', 'password' : 'hola'}, 'gmail' : {'username' : 'allen', 'password' : 'folla'}, 'dropbox' : {'username' : 'michelle', 'password' : 'mollyy' }}}
 }
 
 function serverReg(file, accounts, ID) {
@@ -98,17 +104,54 @@ function serverReg(file, accounts, ID) {
         if(err) {
             console.log(err);
         } else {
-            newUser = User({ accounts: {}, imgPath: [imgPath] })
-            for (acct in accounts) {
-                var vals = accounts[acct];
-                newUser.addAccount(acct, vals["username"], vals["password"])
-            }
-            newUser.save()
+        	newUser = User({ uid: userId, accounts: {}, imgPaths: [imgPath] })
+            userId += 1
+        	for (acct in accounts) {
+        		var vals = accounts[acct];
+        		newUser.addAccount(acct, vals["username"], vals["password"])
+        	}
+        	newUser.save()
             console.log("The file was saved!");
         }
     });
     return {'ID': ID};
 }
+
+function serverAddPhoto(file, ID) {
+    console.log("I'm adding a photo!");
+    console.log("file is: ");
+    console.log(file);
+
+    var imgPath = "images/img_" + imgCount + ".png";
+    imgCount++;
+
+    var fs = require('fs');
+    fs.writeFile(imgPath, file, function(err) {
+        if(err) {
+            console.log(err);
+        } else {
+            console.log("The file was saved!");
+        }
+    });
+    //Need to remove file if it's an unsuccessful add (so check add code)
+    //Else: add to the database
+    return {'ID': ID, 'userAccounts' : {'facebook' : {'username' : 'iris', 'password' : 'hola'}, 'gmail' : {'username' : 'allen', 'password' : 'folla'}, 'dropbox' : {'username' : 'michelle', 'password' : 'mollyy' }}}
+}
+
+function findIdByPath(imgPath, callback) {
+    var cb = callback;
+    var usr = User.find({imgPaths:imgPath}, function(err, user) {
+        if (users.length > 0) {
+            callback(user); return;
+        }
+        callback(null);
+    });
+    if (usr == null) {
+        console.log("could not find usr");
+    } else {
+        return usr;
+    }
+};
 
 server.listen(9000);
 console.log('HTTP and BinaryJS server started on port 9000');

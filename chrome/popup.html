@@ -7,17 +7,29 @@
     <script src="client.js"></script>
     <title>Biome's Popup</title>
     <link rel="stylesheet" type="text/css" href="css/popup.css">
-
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
 
   </head>
     <div id="vid"></div>
     <video id="video"></video>
-    <button id="authenticate">Authenticate</button>
+    <button id="authenticate">Authenticate</button><br>
+    <button id="addimage">Add image and login</button><br>
 
     <form id="loginform">
-        FB Login: <input id="loginText"><br>
-        FB Password: <input type="password" id="passwordText"><br>
+        FB Login: <input id="fbloginText"><br>
+        FB Password: <input type="password" id="fbpasswordText"><br>
     </form>
+
+    <form id="loginform">
+        Gmail Login: <input id="gmailloginText"><br>
+        Gmail Password: <input type="password" id="gmailpasswordText"><br>
+    </form>
+
+    <form id="loginform">
+        Dropbox Login: <input id="dropboxloginText"><br>
+        Dropbox Password: <input type="password" id="dropboxpasswordText"><br>
+    </form>
+
     <button id="register">Register</button>
 
   </body>

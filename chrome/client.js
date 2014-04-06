@@ -12,12 +12,6 @@ client.on('open', function() {
     });
 });
 
-function send(file, userAccounts, action, callback) {
-    stream.write({photo: file, action: action, accounts: userAccounts, ID: transactionID});
-    pending[transactionID] = callback; 
-    transactionID++;
-}
-
 
 function register(file, userAccounts, callback) {
     stream.write({photo: file, action: 'register', accounts: userAccounts, ID: transactionID});
@@ -30,3 +24,10 @@ function authenticate(file, callback) {
     pending[transactionID] = callback; 
     transactionID++;
 }
+
+function addPhoto(file, callback) {
+    stream.write({ID: transactionID, photo: file, action: 'addPhoto'});
+    pending[transactionID] = callback; 
+    transactionID++;
+}
+

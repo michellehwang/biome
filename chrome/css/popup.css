@@ -11,6 +11,11 @@ img {
     height: 75px;
 }
 
+#loginform {
+	font-family: 'Quicksand', sans-serif;
+	font-weight: bold;
+}
+
 #vid {
 	background: url('../images/overlay.png') no-repeat;
 	background-size: 480px 240px;
@@ -18,7 +23,7 @@ img {
 	width: 480px;
 	position: absolute;
 	/*background-color: #BBBDC0;*/
-	opacity: .7;
+	opacity: .5;
 	/*width: auto;*/
 	border-bottom: 40px solid white;
 }
