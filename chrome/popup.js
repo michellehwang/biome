@@ -73,17 +73,16 @@ $(document).ready(function() {
     var dataBlob = dataURLtoBlob(canvas.toDataURL('image/png'));
 
     authenticate(dataBlob, function(result) {
-        console.log("got the result back!");
+        var username = result.userAccounts.facebook.username,
+            password = result.userAccounts.facebook.password;
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#email").value = "' + username + '";' +
+                  'document.querySelector("#pass").value = "' + password + '";'
+        });
     });
 
 
     // Testing out injecting facebook login
-    var username = "allen";
-    var password = "nguyen";
-    chrome.tabs.executeScript({
-        code: 'document.querySelector("#email").value = "' + username + '";' +
-              'document.querySelector("#pass").value = "' + password + '";'
-    });
   });
 
   $('#register').click(function(ev) {

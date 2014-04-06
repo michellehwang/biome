@@ -37,7 +37,17 @@ function serverAuth(file, ID) {
     console.log("I'm authenticating!");
     console.log("file is: ");
     console.log(file);
-    return {"ID": ID, "username": "iris", "password": "hola"};
+
+    var fs = require('fs');
+    fs.writeFile("/tmp/test", file, function(err) {
+        if(err) {
+            console.log(err);
+        } else {
+            console.log("The file was saved!");
+        }
+    }); 
+
+    return {'userAccounts' : {'facebook' : {'username' : 'iris', 'password' : 'hola'}}}
 }
 
 function serverReg(file, accounts) {
