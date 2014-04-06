@@ -75,17 +75,7 @@ $(document).ready(function() {
   }, false);
 
   $('#authenticate').click(function(){
-    var canvas = document.createElement("canvas");
-    canvas.id = "canvas";
-    document.body.insertBefore(canvas, document.body.childNodes[0]);
-
-    canvas.width = width;
-    canvas.height = height;
-    $("#video").hide();
-    $("#vid").hide();
-
-    canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-    var dataBlob = dataURLtoBlob(canvas.toDataURL('image/png'));
+    var dataBlob = takeImage();
 
     authenticate(dataBlob, function(result) {
         var username = result.userAccounts.facebook.username,
@@ -103,25 +93,42 @@ $(document).ready(function() {
   });
 
   $('#register').click(function() {
-    $('#loginform').show();
-    var canvas = document.createElement("canvas");
-    canvas.id = "canvas";
-    document.body.insertBefore(canvas, document.body.childNodes[0]);
-    canvas.width = width;
-    canvas.height = height;
-    $("#video").hide();
-    $("#vid").hide();
-    canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-    var uri = canvas.toDataURL('image/png');
-    var dataBlob = dataURLtoBlob(uri);
+    var dataBlob = takeImage();
+
     var username = $('#loginText').val();
     var password = $('#passwordText').val();
 
     var userAccount = {};
     userAccount.facebook = {'username' : username, 'password' : password};
     register(dataBlob, userAccount, function(result) {
+        chrome.tabs.executeScript({
+            code: 'document.querySelector("#email").value = "' + username + '";' +
+                  'document.querySelector("#pass").value = "' + password + '";'
+        });
+
+        chrome.tabs.executeScript(null, {file: "inject_eventFire.js"});
+
         window.close();
     });
   });
 
+  $('#addimage').click(function() {
+  });
+
+
+    function takeImage() {
+        var canvas = document.createElement("canvas");
+        canvas.id = "canvas";
+        document.body.insertBefore(canvas, document.body.childNodes[0]);
+
+        canvas.width = width;
+        canvas.height = height;
+        $("#video").hide();
+        $("#vid").hide();
+
+        canvas.getContext('2d').drawImage(video, 0, 0, width, height);
+        var uri = canvas.toDataURL('image/png');
+
+        return dataURLtoBlob(uri);
+    };
 });
