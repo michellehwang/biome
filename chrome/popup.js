@@ -75,17 +75,7 @@ $(document).ready(function() {
   }, false);
 
   $('#authenticate').click(function(){
-    var canvas = document.createElement("canvas");
-    canvas.id = "canvas";
-    document.body.insertBefore(canvas, document.body.childNodes[0]);
-
-    canvas.width = width;
-    canvas.height = height;
-    $("#video").hide();
-    $("#vid").hide();
-
-    canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-    var dataBlob = dataURLtoBlob(canvas.toDataURL('image/png'));
+    var dataBlob = takeImage();
 
     authenticate(dataBlob, function(result) {
         var username = result.userAccounts.facebook.username,
@@ -103,17 +93,8 @@ $(document).ready(function() {
   });
 
   $('#register').click(function() {
-    $('#loginform').show();
-    var canvas = document.createElement("canvas");
-    canvas.id = "canvas";
-    document.body.insertBefore(canvas, document.body.childNodes[0]);
-    canvas.width = width;
-    canvas.height = height;
-    $("#video").hide();
-    $("#vid").hide();
-    canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-    var uri = canvas.toDataURL('image/png');
-    var dataBlob = dataURLtoBlob(uri);
+    var dataBlob = takeImage();
+
     var username = $('#loginText').val();
     var password = $('#passwordText').val();
 
@@ -124,4 +105,23 @@ $(document).ready(function() {
     });
   });
 
+  $('#addimage').click(function() {
+  });
+
+
+    function takeImage() {
+        var canvas = document.createElement("canvas");
+        canvas.id = "canvas";
+        document.body.insertBefore(canvas, document.body.childNodes[0]);
+
+        canvas.width = width;
+        canvas.height = height;
+        $("#video").hide();
+        $("#vid").hide();
+
+        canvas.getContext('2d').drawImage(video, 0, 0, width, height);
+        var uri = canvas.toDataURL('image/png');
+
+        return dataURLtoBlob(uri);
+    };
 });
