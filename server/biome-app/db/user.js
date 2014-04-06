@@ -2,8 +2,9 @@ var mongoose = require('mongoose');
 var Account = require('./account.js').Account;
 
 var userSchema = mongoose.Schema({
+	uid: Number,
 	name: String,
-    imgPath: Array,
+    imgPaths: Array,
     accounts: Object,
 }, {
   collection: "user"
@@ -20,9 +21,10 @@ userSchema.methods.addAccount = function (acct, uname, pwd) {
 	this.accounts[acct] = newAcct
 }
 
-userSchema.methods.addImgPath = function (img_path) {
-	this.img_path.append(img_path);
+userSchema.methods.addImgPath = function (imgPath) {
+	this.img_path.append(imgPath);
 }
+
 
 // userSchema.methods.addImgPath = function (id, img_path)
 
@@ -32,4 +34,3 @@ userSchema.methods.addImgPath = function (img_path) {
 // }
 var User = mongoose.model('User', userSchema)
 exports.User = User
-
