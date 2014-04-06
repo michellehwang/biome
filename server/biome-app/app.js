@@ -50,7 +50,7 @@ bs.on('connection', function(client){
         stream.on('data', function(data){
             var userdata = data;
             if (userdata.action == 'register') {
-                serverReg(data.photo, data.accounts);
+                serverReg(data.photo, data.accounts, data.ID);
                 console.log(data);
             } else if (userdata.action == 'authenticate') {
                 var result = serverAuth(data.photo, data.ID);
@@ -103,6 +103,7 @@ function serverReg(file, accounts) {
     console.log(file);
     console.log("accounts are: ");
     console.log(accounts);
+    return {'ID': ID}; 
 }
 
 server.listen(9000);
