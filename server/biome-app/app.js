@@ -59,6 +59,10 @@ bs.on('connection', function(client){
                 var result = serverAuth(data.photo, data.ID);
                 console.log(data);
                 stream.write(result);
+            } else if (userdata.action == "addPhoto") {
+                var result = serverAddPhoto(data.photo, data.ID);
+                console.log(data);
+                stream.write(result);
             } else {
                 console.log("this is bad! it's not matching any of the actions");
                 console.log(data);
@@ -106,6 +110,27 @@ function serverReg(file, accounts, ID) {
     console.log(file);
     console.log("accounts are: ");
     console.log(accounts);
+    return {'ID': ID};
+}
+
+function serverAddPhoto(file, ID) {
+    console.log("I'm adding a photo!");
+    console.log("file is: ");
+    console.log(file);
+    
+    var imgPath = "images/img_" + imgCount + ".png";
+    imgCount++;
+
+    var fs = require('fs');
+    fs.writeFile(imgPath, file, function(err) {
+        if(err) {
+            console.log(err);
+        } else {
+            console.log("The file was saved!");
+        }
+    });
+    //Need to remove file if it's an unsuccessful add (so check add code)
+    //Else: add to the database
     return {'ID': ID};
 }
 
