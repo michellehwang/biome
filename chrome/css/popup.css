@@ -64,7 +64,19 @@ form {
     border-bottom: 40px solid white;
 }
 
+.spinner {
+    top: 34%;
+    left: 50%;
+	z-index: 10;
+    position: absolute;
+}
+
 #video {
+    left: 10%;
+    position: relative;
+}
+
+#canvas {
     left: 10%;
     position: relative;
 }
