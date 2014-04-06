@@ -83,7 +83,7 @@ function serverAuth(file, ID) {
     return {'ID': ID, 'userAccounts' : {'facebook' : {'username' : 'iris', 'password' : 'hola'}}}
 }
 
-function serverReg(file, accounts) {
+function serverReg(file, accounts, ID) {
     var fs = require('fs');
     var imgPath = "images/img_" + imgCount + ".png";
     imgCount++;
