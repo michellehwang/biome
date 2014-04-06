@@ -3,7 +3,7 @@ var Account = require('./account.js').Account;
 
 var userSchema = mongoose.Schema({
 	name: String,
-    img_path: Array,
+    imgPath: Array,
     accounts: Object,
 })
 
@@ -12,7 +12,7 @@ userSchema.methods.deleteAccount = function (id) {
 }
 
 userSchema.methods.addAccount = function (acct, uname, pwd) {
-	newAcct = new Account({ username : uname, password : pwd, "what": "waht" });
+	newAcct = new Account({ username : uname, password : pwd });
 	this.accounts[acct] = newAcct
 }
 

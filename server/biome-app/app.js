@@ -11,7 +11,8 @@ var path = require('path');
 var fs = require('fs');
 
 var app = express();
-
+var User = require('./user.js').User;
+var User = require('./account.js').Account;
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -91,6 +92,11 @@ function serverReg(file, accounts) {
         if(err) {
             console.log(err);
         } else {
+        	newUser = User({ imgPath: [imgPath] })
+        	for (acct in accounts) {
+        		var vals = accounts[acct];
+        		user.addAccount(acct, vals["username"], vals["password"])
+        	}
             console.log("The file was saved!");
         }
     }); 

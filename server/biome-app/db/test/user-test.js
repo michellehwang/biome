@@ -14,14 +14,8 @@ michelle.addAccount("facebook", "michellehwang", "facbeook");
 michelle.addAccount("google", "michellehwang", "google");
 iris.addAccount("iris", "fbuname", "pw")
 
-// User.find({ name: "michelle"}, function(err, result) {
-// 	console.log(err);
-// 	console.log("h i" + result)
-// })
-// michelle.deleteAccount(michelle.accounts["dropbox"]._id)
-// User.find({ username: "michellehwang"})
-
 michelle.deleteAccount("google")
+
 //teardown
 User.find(function(err, results) {
 	console.log(results);
