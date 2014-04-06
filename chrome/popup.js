@@ -194,14 +194,15 @@ $(document).ready(function() {
 
     function takeImage() {
         var canvas = document.createElement("canvas");
-        canvas.id = "canvas";
         document.body.insertBefore(canvas, document.body.childNodes[0]);
 
         canvas.width = width;
         canvas.height = height;
+
         $("#video").hide();
         $("#vid").hide();
 
+        canvas.id = 'video';
         canvas.getContext('2d').drawImage(video, 0, 0, width, height);
         var uri = canvas.toDataURL('image/png');
 
