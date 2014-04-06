@@ -3,44 +3,50 @@ from data import Dataset
 from iris import feature
 
 from svm import SVM, save
-from features import Collection
+from nn import NN
+from rf import RF
+from features import Collection, FeatureExtractor
 
 import numpy as np
 
 parser = ArgumentParser()
 parser.add_argument('path')
 
+classes = {
+    'sharad' : 0,
+    'michelle' : 1
+}
 if __name__ == "__main__":
     args = parser.parse_args()
     path = args.path
     d = Dataset(path, '.png')
     X = np.array([])
     y = np.array([])
-    count = 0
-
     files = {}
     for img_path in d.images:
-        vector = feature(img_path)
+        f = img_path.split('/')[-1]
+        name = f.split('-')[0]
+        c = classes[name]
+        vector = feature(img_path, FeatureExtractor(set(['daisy', 'hog', 'raw'])))
         if X.shape[0] == 0:
             X = vector
         else:
             X = np.vstack([X, vector])
 
         if y.shape[0] == 0:
-            y = np.array([count])
+            y = np.array([c])
         else:
-            y = np.vstack([y, count])
-        if count not in files:
-            files[count] = []
-        files[count].append(img_path)
-        count += 1
+            y = np.vstack([y, c])
+        if c not in files:
+            files[c] = []
+        files[c].append(img_path)
     X = np.matrix(X)
     y = np.matrix(y)
     data = Collection(X, y)
 
-    classifier = SVM(files)
+    classifier = RF(100, files)
     classifier.train(data)
-    save(classifier, 'svm')
+    save(classifier, 'rf')
 
     #classifier.train(data)
     #classifier.save('svm')

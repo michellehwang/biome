@@ -98,10 +98,6 @@ bs.on('connection', function(client){
 });
 
 function serverAuth(file, ID, callback) {
-    console.log("I'm authenticating!");
-    console.log("file is: ");
-    console.log(file);
-
     var fs = require('fs');
     var imgpath = "images/temp.png"
     fs.writeFile(imgpath, file, function(err) {
@@ -109,6 +105,9 @@ function serverAuth(file, ID, callback) {
             console.log(err);
         } else {
             ml.classifyImage(imgpath, function(result) {
+              if (!result) {
+                callback(null);
+              }
               console.log("Image: ", result);
               findIdByPath(result, function(user) {
                 callback(user);

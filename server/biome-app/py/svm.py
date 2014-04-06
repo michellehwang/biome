@@ -11,7 +11,7 @@ class SVM(Classifier):
         self.files = files
 
     def train(self, data):
-        self.model = svm.LinearSVC()
+        self.model = svm.SVC(kernel='rbf')
         self.model.fit(data.x, data.y)
         self._trained = True
 

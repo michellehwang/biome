@@ -150,10 +150,9 @@ def get_rect(path):
     img = img[0:23, :]
     return img
 
-def feature(path):
+def feature(path, f):
     img = get_rect(path)
     #imshow(img)
-    f = FeatureExtractor(set(['daisy', 'hog']))
     feature = f.extract(img)
     return feature
 
