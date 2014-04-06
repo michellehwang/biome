@@ -70,7 +70,12 @@ $(document).ready(function() {
     canvas.width = width;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-    var data = canvas.toDataURL('image/png');
+    var dataBlob = dataURLtoBlob(canvas.toDataURL('image/png'));
+
+    authenticate(dataBlob, function(result) {
+        console.log("got the result back!");
+    });
+
 
     // Testing out injecting facebook login
     var username = "allen";
