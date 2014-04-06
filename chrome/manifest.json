@@ -10,5 +10,9 @@
     "default_popup": "popup.html"
   },
 
+  "permissions": [
+    "tabs", "http://www.facebook.com/*", "activeTab"
+      ],
+
   "options_page": "options.html"
 }
