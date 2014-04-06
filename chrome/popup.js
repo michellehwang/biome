@@ -27,8 +27,8 @@ $(document).ready(function() {
   var streaming = false,
       video        = document.querySelector('#video'),
       photo        = document.querySelector('#photo'),
-      width = 1280,
-      height = 576;
+      width = 800,
+      height = 600;
 
   navigator.getMedia = ( navigator.getUserMedia ||
                          navigator.webkitGetUserMedia ||
@@ -102,8 +102,13 @@ $(document).ready(function() {
 
   $('#register').click(function() {
     $('#loginform').show();
+    var canvas = document.createElement("canvas");
+    canvas.id = "canvas";
+    document.body.insertBefore(canvas, document.body.childNodes[0]);
     canvas.width = width;
     canvas.height = height;
+    $("#video").hide();
+    $("#vid").hide();
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
     var uri = canvas.toDataURL('image/png');
     var dataBlob = dataURLtoBlob(uri);
